@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:meditation_app/category_card.dart';
+import 'package:meditation_app/widgets/bottom_nav_bar.dart';
+import 'package:meditation_app/widgets/category_card.dart';
 import 'package:meditation_app/constants.dart';
 
 void main() {
@@ -31,26 +32,7 @@ class HomeScreen extends StatelessWidget {
     .size;
     // Gives us total height & width size of our device
     return Scaffold(
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-        height: 80,
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            BottomNavItem(
-            svgScr: "assets/icons/calendar.svg",
-            title: "Today"),
-             BottomNavItem(
-            svgScr: "assets/icons/gym.svg",
-            title: "All Exercises", 
-            isActive: true,),
-             BottomNavItem(
-            svgScr: "assets/icons/Settings.svg",
-            title: "Settings"),
-          ], 
-          ),
-      ),
+      bottomNavigationBar: BottomNavBar(),
       body: Stack(
         children: <Widget>[
           Container(
@@ -142,32 +124,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-class BottomNavItem extends StatelessWidget {
-  final String svgScr;
-  final String title;
-  final Function press;
-  final bool isActive;
-  const BottomNavItem({
-    Key key, 
-    this.svgScr, 
-    this.title, 
-    this.press, 
-    this.isActive = false,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: press,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          SvgPicture.asset(svgScr),
-          Text(title, style: TextStyle(color: isActive ? kActiveIconColor: kTextColor),),
-        ],
-        ),
-    );
-  }
-}
-
